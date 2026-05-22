@@ -16,6 +16,7 @@ frontend/dist/
 data/*.npz
 data/*.npy
 data/vectorizer.npz
+data/vector_meta.json
 data/chat_history.json
 data/scrape_log.json
 
