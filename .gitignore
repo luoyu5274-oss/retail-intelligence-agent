@@ -11,11 +11,13 @@ backend/.env
 frontend/node_modules/
 frontend/dist/
 
-# Data — large files
+# Data — large files + local state
 *.pdf
 data/*.npz
 data/*.npy
 data/vectorizer.npz
+data/chat_history.json
+data/scrape_log.json
 
 # OS
 .DS_Store
