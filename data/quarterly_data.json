@@ -1,0 +1,116 @@
+{
+  "nike": [
+    {
+      "revenue_m": 11589,
+      "operating_income_m": 1264,
+      "brand": "Nike",
+      "cal_quarter": "2024 Jul-Sep",
+      "fiscal_q": "Q1FY25",
+      "months": "Jun-Aug 2024",
+      "currency": "USD"
+    },
+    {
+      "revenue_m": 12354,
+      "operating_income_m": 1392,
+      "brand": "Nike",
+      "cal_quarter": "2024 Oct-Dec",
+      "fiscal_q": "Q2FY25",
+      "months": "Sep-Nov 2024",
+      "currency": "USD"
+    },
+    {
+      "revenue_m": 11269,
+      "operating_income_m": 826,
+      "brand": "Nike",
+      "cal_quarter": "2025 Jan-Mar",
+      "fiscal_q": "Q3FY25",
+      "months": "Dec 2024-Feb 2025",
+      "currency": "USD"
+    },
+    {
+      "brand": "Nike",
+      "cal_quarter": "2025 Apr-Jun",
+      "fiscal_q": "Q4FY25 (derived)",
+      "months": "Mar-May 2025",
+      "revenue_m": 11097,
+      "operating_income_m": 403,
+      "currency": "USD"
+    }
+  ],
+  "adidas": [
+    {
+      "revenue_m": 6438,
+      "operating_income_m": 598,
+      "brand": "Adidas",
+      "cal_quarter": "2024 Jul-Sep",
+      "fiscal_q": "Q3FY24",
+      "months": "Jul-Sep 2024",
+      "currency": "EUR"
+    },
+    {
+      "revenue_m": 6153,
+      "operating_income_m": 610,
+      "brand": "Adidas",
+      "cal_quarter": "2025 Jan-Mar",
+      "fiscal_q": "Q1FY25",
+      "months": "Jan-Mar 2025",
+      "currency": "EUR"
+    },
+    {
+      "revenue_m": 5952,
+      "operating_income_m": 546,
+      "brand": "Adidas",
+      "cal_quarter": "2025 Apr-Jun",
+      "fiscal_q": "Q2FY25",
+      "months": "Apr-Jun 2025",
+      "currency": "EUR"
+    },
+    {
+      "revenue_m": 6630,
+      "operating_income_m": 736,
+      "brand": "Adidas",
+      "cal_quarter": "2025 Jul-Sep",
+      "fiscal_q": "Q3FY25",
+      "months": "Jul-Sep 2025",
+      "currency": "EUR"
+    }
+  ],
+  "lululemon": [
+    {
+      "revenue_m": 2396.66,
+      "operating_income_m": 490.661,
+      "brand": "Lululemon",
+      "cal_quarter": "2024 Jul-Sep",
+      "fiscal_q": "Q3FY24",
+      "months": "Aug-Oct 2024",
+      "currency": "USD"
+    },
+    {
+      "revenue_m": 2370.66,
+      "operating_income_m": 438.625,
+      "brand": "Lululemon",
+      "cal_quarter": "2025 Jan-Mar",
+      "fiscal_q": "Q1FY25",
+      "months": "Feb-Apr 2025",
+      "currency": "USD"
+    },
+    {
+      "revenue_m": 2525.219,
+      "operating_income_m": 523.814,
+      "brand": "Lululemon",
+      "cal_quarter": "2025 Apr-Jun",
+      "fiscal_q": "Q2FY25",
+      "months": "May-Jul 2025",
+      "currency": "USD"
+    },
+    {
+      "revenue_m": 2565.92,
+      "operating_income_m": 435.886,
+      "brand": "Lululemon",
+      "cal_quarter": "2025 Jul-Sep",
+      "fiscal_q": "Q3FY25",
+      "months": "Aug-Oct 2025",
+      "currency": "USD"
+    }
+  ]
+}

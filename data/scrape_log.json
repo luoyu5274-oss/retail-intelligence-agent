@@ -1,0 +1,32 @@
+{
+  "entries": [
+    {
+      "brand": "Nike",
+      "ir_url": "https://investors.nike.com/investors/financial-information/annual-reports/default.aspx",
+      "timestamp": "2026-05-19T19:47:00.003902",
+      "new_files": [],
+      "pdf_links_found": 0,
+      "status": "error",
+      "message": "ERROR: Client error '403 Forbidden' for url 'https://investors.nike.com/investors/financial-information/annual-reports/default.aspx'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+    },
+    {
+      "brand": "Adidas",
+      "ir_url": "https://www.adidas-group.com/en/investors/financial-reports/annual-reports/",
+      "timestamp": "2026-05-19T19:47:04.263159",
+      "new_files": [],
+      "pdf_links_found": 0,
+      "status": "error",
+      "message": "ERROR: Client error '404 Not Found' for url 'https://www.adidas-group.com/en/investors/financial-reports/annual-reports/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"
+    },
+    {
+      "brand": "Lululemon",
+      "ir_url": "https://investor.lululemon.com/financial-information/annual-reports",
+      "timestamp": "2026-05-19T19:47:10.359579",
+      "new_files": [],
+      "pdf_links_found": 0,
+      "status": "error",
+      "message": "ERROR: Client error '404 Not Found' for url 'https://corporate.lululemon.com/financial-information/annual-reports'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"
+    }
+  ],
+  "last_run": "2026-05-19T19:47:16.170126"
+}

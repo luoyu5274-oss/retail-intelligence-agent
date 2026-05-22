@@ -1,0 +1,580 @@
+{
+  "nike": {
+    "FY2022": {
+      "brand": "Nike",
+      "fiscal_year": "FY2022",
+      "currency": "USD",
+      "revenue": {
+        "total": 46710,
+        "yoy_growth_pct": 5,
+        "north_america": null,
+        "europe_middle_east_africa": null,
+        "asia_pacific_latin_america": null,
+        "greater_china": null,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": 21479,
+      "gross_margin_pct": 46.0,
+      "operating_income": 6675,
+      "operating_margin_pct": 14.3,
+      "net_income": 6046,
+      "net_margin_pct": 12.9,
+      "eps_diluted": 3.75,
+      "inventory": 8420,
+      "capex": null,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [
+        "营收创纪录达467亿美元，同比增长5%",
+        "毛利率提升120个基点至46.0%",
+        "净利润60.46亿美元，同比增长6%",
+        "NIKE Direct业务增长14%",
+        "大中华区收入下降"
+      ],
+      "strategic_priorities": [
+        "加速数字化转型",
+        "扩大NIKE Direct业务",
+        "优化批发渠道",
+        "提升全价销售占比",
+        "管理外汇风险"
+      ],
+      "risks": [
+        "COVID-19疫情持续影响",
+        "外汇波动风险",
+        "地缘政治不确定性（如俄罗斯市场退出）"
+      ],
+      "brand_key": "nike",
+      "label": "FY2022 (5月)"
+    },
+    "FY2023": {
+      "brand": "Nike",
+      "fiscal_year": "FY2023",
+      "currency": "USD",
+      "revenue": {
+        "total": 51217,
+        "yoy_growth_pct": 10,
+        "north_america": null,
+        "europe_middle_east_africa": null,
+        "asia_pacific_latin_america": null,
+        "greater_china": null,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": 22292,
+      "gross_margin_pct": 43.5,
+      "operating_income": 5915,
+      "operating_margin_pct": 11.5,
+      "net_income": 5070,
+      "net_margin_pct": 9.9,
+      "eps_diluted": 3.23,
+      "inventory": null,
+      "capex": null,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [],
+      "strategic_priorities": [],
+      "risks": [],
+      "brand_key": "nike",
+      "label": "FY2023 (5月)"
+    },
+    "FY2024": {
+      "brand": "Nike",
+      "fiscal_year": "FY2024",
+      "currency": "USD",
+      "revenue": {
+        "total": 51362,
+        "yoy_growth_pct": 30.0,
+        "north_america": null,
+        "europe_middle_east_africa": null,
+        "asia_pacific_latin_america": null,
+        "greater_china": null,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": 22887,
+      "gross_margin_pct": 44.6,
+      "operating_income": 6311,
+      "operating_margin_pct": 12.3,
+      "net_income": 5700,
+      "net_margin_pct": 11.1,
+      "eps_diluted": 3.73,
+      "inventory": null,
+      "capex": null,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [
+        "营收513.62亿美元，同比持平",
+        "毛利率44.6%，同比提升110个基点",
+        "净利润57亿美元，同比增长12%",
+        "稀释每股收益3.73美元，同比增长15%",
+        "经营现金流74.29亿美元，同比增长27%"
+      ],
+      "strategic_priorities": [
+        "加速数字化转型",
+        "优化供应链效率",
+        "拓展新兴市场",
+        "提升直接面向消费者业务",
+        "推动可持续创新"
+      ],
+      "risks": [
+        "外汇波动影响营收约1.41亿美元",
+        "全球宏观经济不确定性",
+        "供应链中断风险"
+      ],
+      "brand_key": "nike",
+      "label": "FY2024 (5月)"
+    },
+    "FY2025": {
+      "brand": "Nike",
+      "fiscal_year": "FY2025",
+      "currency": "USD",
+      "revenue": {
+        "total": 46309,
+        "yoy_growth_pct": -10,
+        "north_america": 19572,
+        "europe_middle_east_africa": 12257,
+        "asia_pacific_latin_america": null,
+        "greater_china": 6586,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": 19790,
+      "gross_margin_pct": 42.7,
+      "operating_income": 3885,
+      "operating_margin_pct": 8.4,
+      "net_income": 3219,
+      "net_margin_pct": 7.0,
+      "eps_diluted": 2.16,
+      "inventory": null,
+      "capex": null,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [
+        "总收入463.09亿美元，同比下降10%",
+        "毛利率42.7%，下降190个基点",
+        "净利润32.19亿美元，同比下降44%",
+        "北美收入195.72亿美元，下降9%",
+        "大中华区收入65.86亿美元，下降13%"
+      ],
+      "strategic_priorities": [
+        "减少部分鞋类产品供应，转向创新产品",
+        "将Nike Direct重塑为全价平台，加大批发分销投入",
+        "增加品牌营销和体育营销投入",
+        "通过降价和折扣清理库存",
+        "提升产品组合和渠道管理"
+      ],
+      "risks": [
+        "新关税导致销售成本大幅增加",
+        "外汇波动和地缘政治不确定性",
+        "消费者行为变化可能影响收入和盈利能力"
+      ],
+      "brand_key": "nike",
+      "label": "FY2025 (5月)"
+    }
+  },
+  "lululemon": {
+    "FY2022": {
+      "brand": "Lululemon",
+      "fiscal_year": "FY2022",
+      "currency": "USD",
+      "revenue": {
+        "total": 8110.518,
+        "yoy_growth_pct": 29.6,
+        "north_america": null,
+        "europe_middle_east_africa": null,
+        "asia_pacific_latin_america": null,
+        "greater_china": null,
+        "dtc": 3699.791,
+        "wholesale": null,
+        "digital_pct": 45.6
+      },
+      "gross_profit": 4492.34,
+      "gross_margin_pct": 55.4,
+      "operating_income": 1328.408,
+      "operating_margin_pct": 16.4,
+      "net_income": 854.8,
+      "net_margin_pct": 10.5,
+      "eps_diluted": 6.68,
+      "inventory": null,
+      "capex": null,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [
+        "净收入同比增长30%至81亿美元",
+        "可比销售总额增长25%",
+        "直接面向消费者渠道净收入增长33%",
+        "推出Power of Three ×2增长计划",
+        "实现净收入翻倍目标"
+      ],
+      "strategic_priorities": [
+        "产品创新：推出Senseknit等新技术",
+        "客户体验：提升全渠道体验",
+        "市场扩张：拓展男装、电商和国际市场",
+        "核心业务增长：保持门店和电商平衡发展",
+        "国际扩张：在亚太、欧洲开设新店"
+      ],
+      "risks": [
+        "宏观经济挑战和供应链中断",
+        "外汇波动影响国际业务",
+        "季节性波动影响运营结果"
+      ],
+      "brand_key": "lululemon",
+      "label": "FY2022 (1月)"
+    },
+    "FY2023": {
+      "brand": "Lululemon",
+      "fiscal_year": "FY2023",
+      "currency": "USD",
+      "revenue": {
+        "total": 9619.278,
+        "yoy_growth_pct": 18.6,
+        "north_america": null,
+        "europe_middle_east_africa": null,
+        "asia_pacific_latin_america": null,
+        "greater_china": null,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": 5609.405,
+      "gross_margin_pct": 58.3,
+      "operating_income": 2132.676,
+      "operating_margin_pct": 22.2,
+      "net_income": 1550.19,
+      "net_margin_pct": 16.1,
+      "eps_diluted": 12.2,
+      "inventory": null,
+      "capex": null,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [
+        "净收入增长19%至96亿美元",
+        "稀释每股收益增长83%至12.20美元",
+        "中国大陆净收入增长67%",
+        "毛利率提升至58.3%",
+        "经营利润率提升至22.2%"
+      ],
+      "strategic_priorities": [
+        "执行Power of Three ×2增长计划",
+        "拓展国际市场，特别是中国大陆和亚太地区",
+        "加强全渠道零售策略",
+        "推动产品创新，涵盖女装、男装及其他品类",
+        "提升运营效率和成本控制"
+      ],
+      "risks": [
+        "宏观经济不确定性影响消费者支出",
+        "外汇波动对财务结果的影响",
+        "供应链中断风险"
+      ],
+      "brand_key": "lululemon",
+      "label": "FY2023 (1月)"
+    },
+    "FY2024": {
+      "brand": "Lululemon",
+      "fiscal_year": "FY2024",
+      "currency": "USD",
+      "revenue": {
+        "total": 10588.126,
+        "yoy_growth_pct": 10.1,
+        "north_america": null,
+        "europe_middle_east_africa": null,
+        "asia_pacific_latin_america": null,
+        "greater_china": null,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": 6270.811,
+      "gross_margin_pct": 59.2,
+      "operating_income": 2505.697,
+      "operating_margin_pct": 23.7,
+      "net_income": 1814.616,
+      "net_margin_pct": 17.1,
+      "eps_diluted": 14.64,
+      "inventory": null,
+      "capex": null,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [
+        "净收入同比增长10%至105.881亿美元",
+        "营业利润率扩大150个基点至23.7%",
+        "稀释每股收益增长20%至14.64美元",
+        "中国大陆收入增长41%",
+        "新增56家净新公司自营门店"
+      ],
+      "strategic_priorities": [
+        "执行Power of Three ×2增长计划",
+        "提升产品季节性新颖度",
+        "扩大零售面积（同比增长14%）",
+        "加强国际市场扩张",
+        "优化全渠道体验"
+      ],
+      "risks": [
+        "宏观经济不确定性影响消费者信心",
+        "外汇波动对财务结果产生不利影响",
+        "网络安全和数据隐私风险"
+      ],
+      "brand_key": "lululemon",
+      "label": "FY2024 (1月)"
+    },
+    "FY2025": {
+      "brand": "Lululemon",
+      "fiscal_year": "FY2025",
+      "currency": "USD",
+      "revenue": {
+        "total": 11102.6,
+        "yoy_growth_pct": 5,
+        "north_america": 7847.044,
+        "europe_middle_east_africa": null,
+        "asia_pacific_latin_america": null,
+        "greater_china": 1754.799,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": 6284.132,
+      "gross_margin_pct": 56.6,
+      "operating_income": 2210.615,
+      "operating_margin_pct": 19.9,
+      "net_income": 1579.183,
+      "net_margin_pct": 14.2,
+      "eps_diluted": 13.26,
+      "inventory": null,
+      "capex": null,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [
+        "净收入同比增长5%至111.03亿美元",
+        "国际收入增长22%，其中中国大陆增长29%",
+        "营业利润率下降380个基点至19.9%",
+        "摊薄每股收益下降9%至13.26美元",
+        "美国关税和de minimis豁免取消对毛利率和运营收入产生负面影响"
+      ],
+      "strategic_priorities": [
+        "扩大国际业务，特别是中国大陆和世界其他地区",
+        "通过选择性提价和供应商谈判缓解关税影响",
+        "提升电商渠道表现，电商净收入增长8%",
+        "优化门店组合，净增44家新店",
+        "应对宏观经济不确定性和消费者情绪变化"
+      ],
+      "risks": [
+        "美国关税和贸易政策变化导致成本上升和利润率下降",
+        "宏观经济波动和通胀压力可能减少消费者对可自由支配产品的需求",
+        "全球政治和经济不稳定可能扰乱供应链并增加成本"
+      ],
+      "brand_key": "lululemon",
+      "label": "FY2025 (1月)"
+    }
+  },
+  "adidas": {
+    "FY2022": {
+      "brand": "Adidas",
+      "fiscal_year": "FY2022",
+      "currency": "EUR",
+      "revenue": {
+        "total": 22511,
+        "yoy_growth_pct": 6,
+        "north_america": 6398,
+        "europe_middle_east_africa": 8550,
+        "asia_pacific_latin_america": 4351,
+        "greater_china": 3179,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": null,
+      "gross_margin_pct": null,
+      "operating_income": 669,
+      "operating_margin_pct": 3.0,
+      "net_income": null,
+      "net_margin_pct": null,
+      "eps_diluted": null,
+      "inventory": null,
+      "capex": 696,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [
+        "总收入225.11亿欧元，同比增长6%",
+        "北美市场收入63.98亿欧元，同比增长25%",
+        "大中华区收入31.79亿欧元，同比下降31%",
+        "拉丁美洲收入21.10亿欧元，同比增长46%",
+        "营业利润6.69亿欧元，同比下降66%"
+      ],
+      "strategic_priorities": [
+        "优化库存管理，提高运营效率",
+        "扩大会员基础，增强消费者忠诚度",
+        "提升女性领导力比例至40%以上",
+        "推动可持续发展，增加可持续产品占比",
+        "加强数字化和电子商务渠道"
+      ],
+      "risks": [
+        "宏观经济不确定性影响消费需求",
+        "供应链中断和成本上升风险",
+        "地缘政治风险，如俄罗斯和阿根廷的外汇管制"
+      ],
+      "brand_key": "adidas",
+      "label": "FY2022 (12月)"
+    },
+    "FY2023": {
+      "brand": "Adidas",
+      "fiscal_year": "FY2023",
+      "currency": "EUR",
+      "revenue": {
+        "total": 21427,
+        "yoy_growth_pct": -5,
+        "north_america": 5219,
+        "europe_middle_east_africa": 8235,
+        "asia_pacific_latin_america": 4545,
+        "greater_china": 3190,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": null,
+      "gross_margin_pct": null,
+      "operating_income": null,
+      "operating_margin_pct": null,
+      "net_income": -75,
+      "net_margin_pct": -0.4,
+      "eps_diluted": -0.42,
+      "inventory": null,
+      "capex": 311,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": null,
+      "key_highlights": [
+        "总收入214.27亿欧元，同比下降5%",
+        "北美市场收入下降19%",
+        "大中华区收入持平",
+        "拉丁美洲收入增长9%",
+        "净亏损7500万欧元"
+      ],
+      "strategic_priorities": [
+        "优化库存管理",
+        "提升运营效率",
+        "加强品牌影响力",
+        "推动可持续发展",
+        "拓展新兴市场"
+      ],
+      "risks": [
+        "宏观经济不确定性",
+        "供应链风险",
+        "市场竞争加剧"
+      ],
+      "brand_key": "adidas",
+      "label": "FY2023 (12月)"
+    },
+    "FY2024": {
+      "brand": "Adidas",
+      "fiscal_year": "FY2024",
+      "currency": "EUR",
+      "revenue": {
+        "total": 23683,
+        "yoy_growth_pct": 11,
+        "north_america": 5128,
+        "europe_middle_east_africa": null,
+        "asia_pacific_latin_america": null,
+        "greater_china": 3459,
+        "dtc": null,
+        "wholesale": null,
+        "digital_pct": null
+      },
+      "gross_profit": 12026,
+      "gross_margin_pct": 50.8,
+      "operating_income": 1337,
+      "operating_margin_pct": 5.6,
+      "net_income": 764,
+      "net_margin_pct": 3.2,
+      "eps_diluted": 4.24,
+      "inventory": 4989,
+      "capex": 540,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": 62035,
+      "key_highlights": [
+        "净销售额增长11%至236.83亿欧元",
+        "毛利率提升至50.8%",
+        "营业利润大幅增长398%至13.37亿欧元",
+        "净利润扭亏为盈，达7.64亿欧元",
+        "每股收益4.24欧元"
+      ],
+      "strategic_priorities": [
+        "推动品牌和产品势头",
+        "优化运营资本管理",
+        "提升资本支出效率",
+        "加强可持续发展",
+        "扩大市场份额"
+      ],
+      "risks": [
+        "宏观经济不确定性",
+        "供应链中断风险",
+        "汇率波动风险"
+      ],
+      "brand_key": "adidas",
+      "label": "FY2024 (12月)"
+    },
+    "FY2025": {
+      "brand": "Adidas",
+      "fiscal_year": "FY2025",
+      "currency": "EUR",
+      "revenue": {
+        "total": 24811,
+        "yoy_growth_pct": 4.8,
+        "north_america": 5087,
+        "europe_middle_east_africa": 8136,
+        "asia_pacific_latin_america": null,
+        "greater_china": 3623,
+        "dtc": 9931,
+        "wholesale": 14833,
+        "digital_pct": null
+      },
+      "gross_profit": 12804,
+      "gross_margin_pct": 51.6,
+      "operating_income": 2056,
+      "operating_margin_pct": 8.3,
+      "net_income": 1340,
+      "net_margin_pct": 5.4,
+      "eps_diluted": 7.46,
+      "inventory": 5832,
+      "capex": 477,
+      "free_cash_flow": null,
+      "store_count": null,
+      "employees": 64938,
+      "key_highlights": [
+        "净销售额增长4.8%至248.11亿欧元",
+        "毛利率提升至51.6%",
+        "营业利润增长53.8%至20.56亿欧元",
+        "净利润增长75.4%至13.40亿欧元",
+        "所有渠道均实现两位数增长"
+      ],
+      "strategic_priorities": [
+        "提升品牌全价销售比例",
+        "优化运营资本管理",
+        "持续投资零售门店",
+        "加强电商渠道发展",
+        "控制库存水平以减少促销活动"
+      ],
+      "risks": [
+        "宏观经济不确定性影响消费者需求",
+        "供应链成本上升风险",
+        "汇率波动对财务业绩的影响"
+      ],
+      "brand_key": "adidas",
+      "label": "FY2025 (12月)"
+    }
+  }
+}
