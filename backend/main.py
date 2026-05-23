@@ -16,7 +16,7 @@ from pydantic import BaseModel
 
 from config import (
     BRAND_CONFIG, CHAT_HISTORY_FILE, FINANCIAL_DATA_FILE,
-    DATA_DIR, BASE_DIR
+    DATA_DIR, BASE_DIR, DEEPSEEK_API_KEY
 )
 import pdf_parser
 import vector_store
@@ -231,6 +231,8 @@ class ChatRequest(BaseModel):
 
 @app.post("/api/chat")
 def chat(req: ChatRequest):
+    if not DEEPSEEK_API_KEY:
+        raise HTTPException(status_code=503, detail="API Key 未配置，请在 Render 环境变量中设置 DEEPSEEK_API_KEY")
     if not vector_store.is_indexed():
         raise HTTPException(status_code=400, detail="请先初始化数据")
 
