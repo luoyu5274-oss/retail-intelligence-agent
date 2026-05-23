@@ -259,7 +259,7 @@ export default function Dashboard({ ready }) {
         <div className="chart-card">
           <div className="chart-title">营收增速 · YoY Revenue Growth</div>
           <ResponsiveContainer width="100%" height={250}>
-            <BarChart data={growth_chart} barGap={4} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+            <LineChart data={growth_chart} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke={chartTheme.grid} vertical={false} />
               <XAxis dataKey="year" tick={{ fill: chartTheme.axis, fontSize: 11 }} axisLine={false} tickLine={false} />
               <YAxis tick={{ fill: chartTheme.axis, fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
@@ -267,9 +267,11 @@ export default function Dashboard({ ready }) {
               <Tooltip content={<CustomTooltip unit="%" />} />
               <Legend wrapperStyle={{ fontSize: 12, color: chartTheme.text }} />
               {brands.map((b) => growth_chart.some((r) => r[b] != null) && (
-                <Bar key={b} dataKey={b} fill={BRAND_COLORS[b]} radius={[4, 4, 0, 0]} maxBarSize={52} />
+                <Line key={b} type="monotone" dataKey={b} stroke={BRAND_COLORS[b]}
+                  strokeWidth={2.5} dot={{ r: 5, fill: BRAND_COLORS[b], strokeWidth: 0 }}
+                  activeDot={{ r: 7, strokeWidth: 0 }} />
               ))}
-            </BarChart>
+            </LineChart>
           </ResponsiveContainer>
         </div>
 
