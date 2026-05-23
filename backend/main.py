@@ -236,6 +236,18 @@ def chat(req: ChatRequest):
     if not vector_store.is_indexed():
         raise HTTPException(status_code=400, detail="请先初始化数据")
 
+    try:
+        return _chat_impl(req)
+    except Exception as e:
+        import traceback
+        return JSONResponse(status_code=500, content={
+            "answer": f"服务器内部错误: {type(e).__name__} — {e}",
+            "sources": [],
+            "traceback": traceback.format_exc(),
+        })
+
+
+def _chat_impl(req: ChatRequest):
     # Retrieve relevant chunks
     chunks = vector_store.query(req.question, brand_filter=req.brand_filter)
     context_parts = []
