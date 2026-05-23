@@ -2,7 +2,6 @@
 Vector store using sklearn TfidfVectorizer for fast indexing.
 Instant on CPU — no model download, no GPU needed.
 Persists to data/vector_store.npz + data/vector_meta.json.
-Vectorizer is rebuilt from docs on load (fast, no pickle compat issues).
 """
 import json
 import numpy as np
@@ -13,6 +12,7 @@ from config import DATA_DIR, TOP_K_RESULTS
 
 _STORE_NPZ = DATA_DIR / "vector_store.npz"
 _STORE_META = DATA_DIR / "vector_meta.json"
+_VECTORIZER_PKL = DATA_DIR / "vectorizer.pkl"
 
 _vectorizer: TfidfVectorizer | None = None
 _embeddings: np.ndarray | None = None
@@ -36,18 +36,37 @@ def _build_vectorizer(texts: list[str], progress_cb=None) -> TfidfVectorizer:
 
 def _load_store():
     global _embeddings, _docs, _metas, _vectorizer
-    if _embeddings is None and _STORE_META.exists():
-        with open(_STORE_META, "r", encoding="utf-8") as f:
-            store = json.load(f)
-        _docs = store["docs"]
-        _metas = store["metas"]
-        # Rebuild vectorizer from docs (fast, avoids pickle version issues)
+    if _embeddings is not None:
+        return
+    if not _STORE_META.exists():
+        return
+    with open(_STORE_META, "r", encoding="utf-8") as f:
+        store = json.load(f)
+    _docs = store["docs"]
+    _metas = store["metas"]
+    # Try loading pickled vectorizer first (fast, version-dependent)
+    if _VECTORIZER_PKL.exists() and _vectorizer is None:
+        try:
+            import joblib
+            _vectorizer = joblib.load(str(_VECTORIZER_PKL))
+        except Exception:
+            pass
+    # Fallback: rebuild from docs (slower but version-independent)
+    if _vectorizer is None:
         _vectorizer = _build_vectorizer(_docs)
-        if _STORE_NPZ.exists():
-            data = np.load(str(_STORE_NPZ), allow_pickle=True)
-            _embeddings = data["embeddings"]
-        else:
-            _embeddings = _vectorizer.transform(_docs).toarray().astype(np.float32)
+    if _STORE_NPZ.exists():
+        data = np.load(str(_STORE_NPZ), allow_pickle=True)
+        _embeddings = data["embeddings"]
+
+
+def _save_store():
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    np.savez_compressed(str(_STORE_NPZ), embeddings=_embeddings)
+    with open(_STORE_META, "w", encoding="utf-8") as f:
+        json.dump({"docs": _docs, "metas": _metas}, f, ensure_ascii=False)
+    if _vectorizer is not None:
+        import joblib
+        joblib.dump(_vectorizer, str(_VECTORIZER_PKL))
 
 
 def _save_store():
