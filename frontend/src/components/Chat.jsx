@@ -247,35 +247,47 @@ function formatMarkdown(text) {
 
 const CHART_COLORS = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
 
-/* ── Parse AI content: [CHART:...] blocks → chart, |...| → table ── */
+/* ── Parse AI content: [CHART:{...}] blocks → chart, |...| → table ── */
 function parseContent(content) {
   const blocks = [];
-  // Split on [CHART:{...}] — LLM outputs this for inline charts
-  const parts = content.split(/(\[CHART:\{.*?\}\])/gs);
-  let textBuf = [];
+  let textBuf = "";
+  let i = 0;
 
-  for (const part of parts) {
-    if (part.startsWith("[CHART:{")) {
-      if (textBuf.length > 0) { flushText(textBuf, blocks); textBuf = []; }
-      try {
-        const json = part.slice(7, -1); // remove "[CHART:" prefix and "]" suffix
-        const chart = JSON.parse(json);
-        blocks.push({ type: "chart", chart });
-      } catch {
-        textBuf.push(part);
+  while (i < content.length) {
+    const chartStart = content.indexOf("[CHART:{", i);
+    if (chartStart === -1) { textBuf += content.slice(i); break; }
+    textBuf += content.slice(i, chartStart);
+    // Find matching "}]" — count { } depth
+    let depth = 0;
+    let j = chartStart + 7; // skip "[CHART:"
+    while (j < content.length) {
+      if (content[j] === "{") depth++;
+      else if (content[j] === "}") {
+        depth--;
+        if (depth === 0 && content[j + 1] === "]") { j += 2; break; }
       }
-    } else if (part) {
-      textBuf.push(part);
+      j++;
+    }
+    if (depth === 0 && j > chartStart + 8) {
+      if (textBuf) { flushTextBuf(textBuf, blocks); textBuf = ""; }
+      try {
+        const json = content.slice(chartStart + 7, j - 1);
+        blocks.push({ type: "chart", chart: JSON.parse(json) });
+      } catch {
+        textBuf += content.slice(chartStart, j);
+      }
+      i = j;
+    } else {
+      textBuf += content[chartStart];
+      i = chartStart + 1;
     }
   }
-  if (textBuf.length > 0) flushText(textBuf, blocks);
+  if (textBuf) flushTextBuf(textBuf, blocks);
   return blocks;
 }
 
-function flushText(textBuf, blocks) {
-  const text = textBuf.join("");
-  textBuf.length = 0;
-  // Further split by markdown tables within text blocks
+function flushTextBuf(text, blocks) {
+  if (!text) return;
   const lines = text.split("\n");
   let inner = [];
   let tableLines = [];
