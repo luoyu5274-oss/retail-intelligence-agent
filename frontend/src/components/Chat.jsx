@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { BarChart, Bar, Cell, LineChart, Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, LineChart, Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { sendChat, getChatHistory, clearChatHistory } from "../utils/api";
 
 const SUGGESTED = [
@@ -147,8 +147,6 @@ export default function Chat({ ready, brands }) {
               {msg.role === "ai" ? blocks.map((block, bi) =>
                 block.type === "table" ? (
                   <TableBlock key={bi} table={block.table} />
-                ) : block.type === "chart" ? (
-                  <ChartBlock key={bi} chart={block.chart} />
                 ) : (
                   <div key={bi} dangerouslySetInnerHTML={{ __html: formatMarkdown(block.content) }} />
                 )
@@ -245,50 +243,10 @@ function formatMarkdown(text) {
     .replace(/\n/g, "<br/>");
 }
 
-const CHART_COLORS = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
-
-/* ── Parse AI content: [CHART:{...}] blocks → chart, |...| → table ── */
+/* ── Parse AI content: |...| → table, rest → text ── */
 function parseContent(content) {
   const blocks = [];
-  let textBuf = "";
-  let i = 0;
-
-  while (i < content.length) {
-    const chartStart = content.indexOf("[CHART:{", i);
-    if (chartStart === -1) { textBuf += content.slice(i); break; }
-    textBuf += content.slice(i, chartStart);
-    // Find matching "}]" — count { } depth
-    let depth = 0;
-    let j = chartStart + 7; // skip "[CHART:"
-    while (j < content.length) {
-      if (content[j] === "{") depth++;
-      else if (content[j] === "}") {
-        depth--;
-        if (depth === 0 && content[j + 1] === "]") { j += 2; break; }
-      }
-      j++;
-    }
-    if (depth === 0 && j > chartStart + 8) {
-      if (textBuf) { flushTextBuf(textBuf, blocks); textBuf = ""; }
-      try {
-        const json = content.slice(chartStart + 7, j - 1);
-        blocks.push({ type: "chart", chart: JSON.parse(json) });
-      } catch {
-        textBuf += content.slice(chartStart, j);
-      }
-      i = j;
-    } else {
-      textBuf += content[chartStart];
-      i = chartStart + 1;
-    }
-  }
-  if (textBuf) flushTextBuf(textBuf, blocks);
-  return blocks;
-}
-
-function flushTextBuf(text, blocks) {
-  if (!text) return;
-  const lines = text.split("\n");
+  const lines = content.split("\n");
   let inner = [];
   let tableLines = [];
   let i = 0;
@@ -308,6 +266,7 @@ function flushTextBuf(text, blocks) {
     }
   }
   if (inner.length > 0) blocks.push({ type: "text", content: inner.join("\n") });
+  return blocks;
 }
 
 function parseTable(lines) {
@@ -350,54 +309,6 @@ function tableToChartData(table) {
     barCols: barCols.map((ci) => table.headers[ci]),
     lineCols: lineCols.map((ci) => table.headers[ci]),
   };
-}
-
-/* ── Inline Chart Block (parsed from [CHART:{...}] syntax) ── */
-function ChartBlock({ chart }) {
-  if (!chart || !chart.data || chart.data.length === 0) return null;
-  const type = chart.type || "bar";
-  const data = chart.data;
-  // Extract series names from data keys (exclude "name")
-  const firstRow = data[0];
-  const seriesKeys = firstRow ? Object.keys(firstRow).filter((k) => k !== "name") : [];
-  const colors = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
-
-  // Per-brand colors: match brand name in data point labels
-  const BRAND_MAP = { nike: "#e05000", adidas: "#2d2d2d", lululemon: "#9b1b3a" };
-  const FALLBACK = ["#d97706", "#059669", "#0ea5e9", "#7c3aed", "#db2777", "#0891b2"];
-  function brandColor(name) {
-    const lower = (name || "").toLowerCase();
-    for (const [b, c] of Object.entries(BRAND_MAP)) { if (lower.includes(b)) return c; }
-    return null;
-  }
-  const singleSeries = seriesKeys.length === 1;
-  return (
-    <div className="chat-chart" style={{ marginBottom: 12 }}>
-      <div className="chat-chart-title">{chart.title || "Chart"}</div>
-      <ResponsiveContainer width="100%" height={220}>
-        <ChartComponent data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e8e0d5" vertical={false} />
-          <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#9b8d7e" }} axisLine={false} tickLine={false} />
-          <YAxis tick={{ fontSize: 10, fill: "#9b8d7e" }} axisLine={false} tickLine={false} />
-          <Tooltip contentStyle={{ background: "#fff", border: "1px solid #ddd5c9", borderRadius: 4, fontSize: 11 }} />
-          {!singleSeries && seriesKeys.length > 1 && <Legend wrapperStyle={{ fontSize: 10 }} />}
-          {singleSeries ? (
-            <Bar dataKey={seriesKeys[0]} radius={[4, 4, 0, 0]}>
-              {data.map((row, idx) => (
-                <Cell key={idx} fill={brandColor(row.name) || FALLBACK[idx % FALLBACK.length]} />
-              ))}
-            </Bar>
-          ) : seriesKeys.map((key, ci) =>
-            type === "line" ? (
-              <Line key={key} type="monotone" dataKey={key} stroke={colors[ci % colors.length]} strokeWidth={2.5} dot={{ r: 4, fill: colors[ci % colors.length] }} />
-            ) : (
-              <Bar key={key} dataKey={key} fill={colors[ci % colors.length]} radius={[4, 4, 0, 0]} maxBarSize={44} />
-            )
-          )}
-        </ChartComponent>
-      </ResponsiveContainer>
-    </div>
-  );
 }
 
 /* ── Table block with Chart toggle ─────────── */
