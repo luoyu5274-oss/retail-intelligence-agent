@@ -25,7 +25,7 @@ def _build_vectorizer(texts: list[str], progress_cb=None) -> TfidfVectorizer:
     if progress_cb:
         progress_cb("构建 TF-IDF 向量化器…")
     return TfidfVectorizer(
-        max_features=8000,
+        max_features=2000,
         ngram_range=(1, 2),
         stop_words="english",
         max_df=0.85,
