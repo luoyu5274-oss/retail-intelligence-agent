@@ -243,6 +243,8 @@ function formatMarkdown(text) {
     .replace(/\n/g, "<br/>");
 }
 
+const CHART_COLORS = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
+
 /* ── Parse AI content: |...| → table, rest → text ── */
 function parseContent(content) {
   const blocks = [];
