@@ -1,4 +1,4 @@
-const BASE = "http://localhost:8000";
+const BASE = "";
 
 export async function getStatus() {
   const r = await fetch(`${BASE}/api/status`);

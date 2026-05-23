@@ -4,6 +4,7 @@ Instant on CPU — no model download, no GPU needed.
 Persists to data/vector_store.npz + data/vector_meta.json.
 """
 import json
+import joblib
 import numpy as np
 from pathlib import Path
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -12,7 +13,7 @@ from config import DATA_DIR, TOP_K_RESULTS
 
 _STORE_NPZ = DATA_DIR / "vector_store.npz"
 _STORE_META = DATA_DIR / "vector_meta.json"
-_VECTORIZER_NPZ = DATA_DIR / "vectorizer.npz"
+_VECTORIZER_PKL = DATA_DIR / "vectorizer.pkl"
 
 _vectorizer: TfidfVectorizer | None = None
 _embeddings: np.ndarray | None = None
@@ -43,6 +44,8 @@ def _load_store():
             store = json.load(f)
         _docs = store["docs"]
         _metas = store["metas"]
+        if _VECTORIZER_PKL.exists():
+            _vectorizer = joblib.load(str(_VECTORIZER_PKL))
 
 
 def _save_store():
@@ -50,6 +53,8 @@ def _save_store():
     np.savez_compressed(str(_STORE_NPZ), embeddings=_embeddings)
     with open(_STORE_META, "w", encoding="utf-8") as f:
         json.dump({"docs": _docs, "metas": _metas}, f, ensure_ascii=False)
+    if _vectorizer is not None:
+        joblib.dump(_vectorizer, str(_VECTORIZER_PKL))
 
 
 def is_indexed() -> bool:
@@ -119,3 +124,5 @@ def reset():
         _STORE_NPZ.unlink()
     if _STORE_META.exists():
         _STORE_META.unlink()
+    if _VECTORIZER_PKL.exists():
+        _VECTORIZER_PKL.unlink()

@@ -10,7 +10,8 @@ from pathlib import Path
 
 from fastapi import FastAPI, BackgroundTasks, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import JSONResponse, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
 from config import (
@@ -364,3 +365,18 @@ def reset_financial():
     if FINANCIAL_DATA_FILE.exists():
         FINANCIAL_DATA_FILE.unlink()
     return {"status": "financial_data_reset"}
+
+
+# ── Serve frontend SPA in production ─────────────────────────────────────────
+FRONTEND_DIST = BASE_DIR / "frontend" / "dist"
+if FRONTEND_DIST.exists():
+    from starlette.responses import FileResponse as StarletteFileResponse
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_frontend(full_path: str):
+        """Catch-all for SPA — serves index.html for client-side routing.
+        Registered last so /api/* routes take priority."""
+        file_path = FRONTEND_DIST / full_path
+        if file_path.exists() and file_path.is_file():
+            return StarletteFileResponse(file_path)
+        return StarletteFileResponse(FRONTEND_DIST / "index.html")

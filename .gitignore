@@ -9,14 +9,8 @@ backend/.env
 
 # Node
 frontend/node_modules/
-frontend/dist/
 
-# Data — large files + local state
-*.pdf
-data/*.npz
-data/*.npy
-data/vectorizer.npz
-data/vector_meta.json
+# Data — local state only (runtime artifacts stay ignored)
 data/chat_history.json
 data/scrape_log.json
 
