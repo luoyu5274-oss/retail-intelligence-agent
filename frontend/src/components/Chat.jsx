@@ -362,7 +362,14 @@ function ChartBlock({ chart }) {
   const seriesKeys = firstRow ? Object.keys(firstRow).filter((k) => k !== "name") : [];
   const colors = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
 
-  const ChartComponent = type === "line" ? LineChart : BarChart;
+  // Per-brand colors: match brand name in data point labels
+  const BRAND_MAP = { nike: "#e05000", adidas: "#2d2d2d", lululemon: "#9b1b3a" };
+  const FALLBACK = ["#d97706", "#059669", "#0ea5e9", "#7c3aed", "#db2777", "#0891b2"];
+  function brandColor(name) {
+    const lower = (name || "").toLowerCase();
+    for (const [b, c] of Object.entries(BRAND_MAP)) { if (lower.includes(b)) return c; }
+    return null;
+  }
   const singleSeries = seriesKeys.length === 1;
   return (
     <div className="chat-chart" style={{ marginBottom: 12 }}>
@@ -376,8 +383,8 @@ function ChartBlock({ chart }) {
           {!singleSeries && seriesKeys.length > 1 && <Legend wrapperStyle={{ fontSize: 10 }} />}
           {singleSeries ? (
             <Bar dataKey={seriesKeys[0]} radius={[4, 4, 0, 0]}>
-              {data.map((_, idx) => (
-                <Cell key={idx} fill={colors[idx % colors.length]} />
+              {data.map((row, idx) => (
+                <Cell key={idx} fill={brandColor(row.name) || FALLBACK[idx % FALLBACK.length]} />
               ))}
             </Bar>
           ) : seriesKeys.map((key, ci) =>
