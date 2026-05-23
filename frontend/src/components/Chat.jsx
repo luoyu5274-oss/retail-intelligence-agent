@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { BarChart, Bar, LineChart, Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, Cell, LineChart, Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { sendChat, getChatHistory, clearChatHistory } from "../utils/api";
 
 const SUGGESTED = [
@@ -363,6 +363,7 @@ function ChartBlock({ chart }) {
   const colors = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
 
   const ChartComponent = type === "line" ? LineChart : BarChart;
+  const singleSeries = seriesKeys.length === 1;
   return (
     <div className="chat-chart" style={{ marginBottom: 12 }}>
       <div className="chat-chart-title">{chart.title || "Chart"}</div>
@@ -372,8 +373,14 @@ function ChartBlock({ chart }) {
           <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#9b8d7e" }} axisLine={false} tickLine={false} />
           <YAxis tick={{ fontSize: 10, fill: "#9b8d7e" }} axisLine={false} tickLine={false} />
           <Tooltip contentStyle={{ background: "#fff", border: "1px solid #ddd5c9", borderRadius: 4, fontSize: 11 }} />
-          {seriesKeys.length > 1 && <Legend wrapperStyle={{ fontSize: 10 }} />}
-          {seriesKeys.map((key, ci) =>
+          {!singleSeries && seriesKeys.length > 1 && <Legend wrapperStyle={{ fontSize: 10 }} />}
+          {singleSeries ? (
+            <Bar dataKey={seriesKeys[0]} radius={[4, 4, 0, 0]}>
+              {data.map((_, idx) => (
+                <Cell key={idx} fill={colors[idx % colors.length]} />
+              ))}
+            </Bar>
+          ) : seriesKeys.map((key, ci) =>
             type === "line" ? (
               <Line key={key} type="monotone" dataKey={key} stroke={colors[ci % colors.length]} strokeWidth={2.5} dot={{ r: 4, fill: colors[ci % colors.length] }} />
             ) : (
