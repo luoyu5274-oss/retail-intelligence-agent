@@ -12,19 +12,22 @@ def get_client() -> OpenAI:
         base = DEEPSEEK_BASE_URL.rstrip("/")
         if not base.endswith("/v1"):
             base += "/v1"
-        _client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url=base)
+        _client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url=base, timeout=30.0, max_retries=1)
     return _client
 
 
 def chat(messages: list[dict], temperature: float = 0.3, max_tokens: int = 2048) -> str:
     client = get_client()
-    resp = client.chat.completions.create(
-        model=DEEPSEEK_MODEL,
-        messages=messages,
-        temperature=temperature,
-        max_tokens=max_tokens,
-    )
-    return resp.choices[0].message.content or ""
+    try:
+        resp = client.chat.completions.create(
+            model=DEEPSEEK_MODEL,
+            messages=messages,
+            temperature=temperature,
+            max_tokens=max_tokens,
+        )
+        return resp.choices[0].message.content or ""
+    except Exception as e:
+        return f"[Error: {type(e).__name__} — {e}]"
 
 
 def extract_json(messages: list[dict], max_tokens: int = 4096) -> dict | list:
