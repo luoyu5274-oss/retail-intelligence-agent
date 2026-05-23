@@ -147,6 +147,8 @@ export default function Chat({ ready, brands }) {
               {msg.role === "ai" ? blocks.map((block, bi) =>
                 block.type === "table" ? (
                   <TableBlock key={bi} table={block.table} />
+                ) : block.type === "chart" ? (
+                  <ChartBlock key={bi} chart={block.chart} />
                 ) : (
                   <div key={bi} dangerouslySetInnerHTML={{ __html: formatMarkdown(block.content) }} />
                 )
@@ -245,30 +247,55 @@ function formatMarkdown(text) {
 
 const CHART_COLORS = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
 
-/* ── Parse AI content into text + table blocks ─── */
+/* ── Parse AI content: [CHART:...] blocks → chart, |...| → table ── */
 function parseContent(content) {
   const blocks = [];
-  const lines = content.split("\n");
+  // Split on [CHART:{...}] — LLM outputs this for inline charts
+  const parts = content.split(/(\[CHART:\{.*?\}\])/gs);
   let textBuf = [];
+
+  for (const part of parts) {
+    if (part.startsWith("[CHART:{")) {
+      if (textBuf.length > 0) { flushText(textBuf, blocks); textBuf = []; }
+      try {
+        const json = part.slice(7, -1); // remove "[CHART:" prefix and "]" suffix
+        const chart = JSON.parse(json);
+        blocks.push({ type: "chart", chart });
+      } catch {
+        textBuf.push(part);
+      }
+    } else if (part) {
+      textBuf.push(part);
+    }
+  }
+  if (textBuf.length > 0) flushText(textBuf, blocks);
+  return blocks;
+}
+
+function flushText(textBuf, blocks) {
+  const text = textBuf.join("");
+  textBuf.length = 0;
+  // Further split by markdown tables within text blocks
+  const lines = text.split("\n");
+  let inner = [];
   let tableLines = [];
   let i = 0;
 
   while (i < lines.length) {
     const line = lines[i];
     if (/^\|.+\|/.test(line)) {
-      if (textBuf.length > 0) { blocks.push({ type: "text", content: textBuf.join("\n") }); textBuf = []; }
+      if (inner.length > 0) { blocks.push({ type: "text", content: inner.join("\n") }); inner = []; }
       tableLines.push(line);
       i++;
       while (i < lines.length && /^\|.+\|/.test(lines[i])) { tableLines.push(lines[i]); i++; }
       blocks.push({ type: "table", table: parseTable(tableLines) });
       tableLines = [];
     } else {
-      textBuf.push(line);
+      inner.push(line);
       i++;
     }
   }
-  if (textBuf.length > 0) blocks.push({ type: "text", content: textBuf.join("\n") });
-  return blocks;
+  if (inner.length > 0) blocks.push({ type: "text", content: inner.join("\n") });
 }
 
 function parseTable(lines) {
@@ -311,6 +338,40 @@ function tableToChartData(table) {
     barCols: barCols.map((ci) => table.headers[ci]),
     lineCols: lineCols.map((ci) => table.headers[ci]),
   };
+}
+
+/* ── Inline Chart Block (parsed from [CHART:{...}] syntax) ── */
+function ChartBlock({ chart }) {
+  if (!chart || !chart.data || chart.data.length === 0) return null;
+  const type = chart.type || "bar";
+  const data = chart.data;
+  // Extract series names from data keys (exclude "name")
+  const firstRow = data[0];
+  const seriesKeys = firstRow ? Object.keys(firstRow).filter((k) => k !== "name") : [];
+  const colors = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
+
+  const ChartComponent = type === "line" ? LineChart : BarChart;
+  return (
+    <div className="chat-chart" style={{ marginBottom: 12 }}>
+      <div className="chat-chart-title">{chart.title || "Chart"}</div>
+      <ResponsiveContainer width="100%" height={220}>
+        <ChartComponent data={data} margin={{ top: 4, right: 8, left: 0, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#e8e0d5" vertical={false} />
+          <XAxis dataKey="name" tick={{ fontSize: 10, fill: "#9b8d7e" }} axisLine={false} tickLine={false} />
+          <YAxis tick={{ fontSize: 10, fill: "#9b8d7e" }} axisLine={false} tickLine={false} />
+          <Tooltip contentStyle={{ background: "#fff", border: "1px solid #ddd5c9", borderRadius: 4, fontSize: 11 }} />
+          {seriesKeys.length > 1 && <Legend wrapperStyle={{ fontSize: 10 }} />}
+          {seriesKeys.map((key, ci) =>
+            type === "line" ? (
+              <Line key={key} type="monotone" dataKey={key} stroke={colors[ci % colors.length]} strokeWidth={2.5} dot={{ r: 4, fill: colors[ci % colors.length] }} />
+            ) : (
+              <Bar key={key} dataKey={key} fill={colors[ci % colors.length]} radius={[4, 4, 0, 0]} maxBarSize={44} />
+            )
+          )}
+        </ChartComponent>
+      </ResponsiveContainer>
+    </div>
+  );
 }
 
 /* ── Table block with Chart toggle ─────────── */
