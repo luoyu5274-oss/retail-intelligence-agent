@@ -295,11 +295,11 @@ function tableToChartData(table) {
   for (let ci = 1; ci < table.headers.length; ci++) {
     const header = table.headers[ci].toLowerCase();
     const isPct = /[%％]|rate|growth|margin|增速|率/.test(header);
-    const allNumeric = table.rows.every((r) => {
+    const numericCount = table.rows.filter((r) => {
       const v = parseFloat(String(r[ci] || "").replace(/[,%$€£\s]/g, ""));
       return !isNaN(v);
-    });
-    if (!allNumeric) continue;
+    }).length;
+    if (numericCount < table.rows.length * 0.5) continue;  // at least half must be numeric
     if (isPct) lineCols.push(ci);
     else barCols.push(ci);
   }
