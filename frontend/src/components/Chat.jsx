@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { BarChart, Bar, LineChart, Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, Cell, LineChart, Line, ComposedChart, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { sendChat, getChatHistory, clearChatHistory } from "../utils/api";
 
 const SUGGESTED = [
@@ -244,6 +244,13 @@ function formatMarkdown(text) {
 }
 
 const CHART_COLORS = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
+const BRAND_COLOR_MAP = { nike: "#e05000", adidas: "#2d2d2d", lululemon: "#9b1b3a" };
+const FALLBACK = ["#d97706", "#059669", "#0ea5e9", "#7c3aed", "#db2777", "#0891b2"];
+function brandColor(name) {
+  const lower = (name || "").toLowerCase();
+  for (const [b, c] of Object.entries(BRAND_COLOR_MAP)) { if (lower.includes(b)) return c; }
+  return null;
+}
 
 /* ── Parse AI content: |...| → table, rest → text ── */
 function parseContent(content) {
@@ -336,7 +343,13 @@ function TableBlock({ table }) {
             {isCombo && <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 10, fill: "#9b8d7e" }} axisLine={false} tickLine={false} unit="%" />}
             <Tooltip contentStyle={{ background: "#fff", border: "1px solid #ddd5c9", borderRadius: 4, fontSize: 11 }} />
             {(chartData.barCols.length + chartData.lineCols.length) > 1 && <Legend wrapperStyle={{ fontSize: 10 }} />}
-            {chartData.barCols.map((col, ci) => (
+            {chartData.barCols.length === 1 && chartData.lineCols.length === 0 ? (
+              <Bar yAxisId="left" dataKey={chartData.barCols[0]} radius={[4, 4, 0, 0]} maxBarSize={44}>
+                {chartData.data.map((row, idx) => (
+                  <Cell key={idx} fill={brandColor(row.name) || FALLBACK[idx % FALLBACK.length]} />
+                ))}
+              </Bar>
+            ) : chartData.barCols.map((col, ci) => (
               <Bar key={col} yAxisId="left" dataKey={col} fill={CHART_COLORS[ci % CHART_COLORS.length]} radius={[4, 4, 0, 0]} maxBarSize={44} />
             ))}
             {chartData.lineCols.map((col, ci) => (
