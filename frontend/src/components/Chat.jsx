@@ -352,9 +352,13 @@ function TableBlock({ table }) {
             ) : chartData.barCols.map((col, ci) => (
               <Bar key={col} yAxisId="left" dataKey={col} fill={brandColor(col) || CHART_COLORS[ci % CHART_COLORS.length]} radius={[4, 4, 0, 0]} maxBarSize={44} />
             ))}
-            {chartData.lineCols.map((col, ci) => (
-              <Line key={col} yAxisId="right" dataKey={col} stroke={CHART_COLORS[(chartData.barCols.length + ci) % CHART_COLORS.length]} strokeWidth={2.5} dot={{ r: 4, fill: CHART_COLORS[(chartData.barCols.length + ci) % CHART_COLORS.length] }} />
-            ))}
+            {chartData.lineCols.map((col, ci) => {
+              const lc = brandColor(col) || CHART_COLORS[(chartData.barCols.length + ci) % CHART_COLORS.length];
+              return (
+                <Line key={col} yAxisId="right" dataKey={col} stroke={lc} strokeWidth={2.5}
+                  connectNulls dot={{ r: 4, fill: lc, strokeWidth: 0 }} />
+              );
+            })}
           </Chart>
         </ResponsiveContainer>
       </div>
