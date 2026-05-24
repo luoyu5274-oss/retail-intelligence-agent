@@ -245,7 +245,18 @@ function formatMarkdown(text) {
 
 const CHART_COLORS = ["#e05000", "#2d2d2d", "#9b1b3a", "#d97706", "#059669", "#0ea5e9"];
 const BRAND_COLOR_MAP = { nike: "#e05000", adidas: "#2d2d2d", lululemon: "#9b1b3a" };
+const LINE_COLORS = { nike: "#38bdf8", adidas: "#a78bfa", lululemon: "#34d399" };  // distinct from bar fills
 const FALLBACK = ["#d97706", "#059669", "#0ea5e9", "#7c3aed", "#db2777", "#0891b2"];
+function brandColor(name) {
+  const lower = (name || "").toLowerCase();
+  for (const [b, c] of Object.entries(BRAND_COLOR_MAP)) { if (lower.includes(b)) return c; }
+  return null;
+}
+function lineColor(name) {
+  const lower = (name || "").toLowerCase();
+  for (const [b, c] of Object.entries(LINE_COLORS)) { if (lower.includes(b)) return c; }
+  return null;
+}
 function brandColor(name) {
   const lower = (name || "").toLowerCase();
   for (const [b, c] of Object.entries(BRAND_COLOR_MAP)) { if (lower.includes(b)) return c; }
@@ -353,7 +364,7 @@ function TableBlock({ table }) {
               <Bar key={col} yAxisId="left" dataKey={col} fill={brandColor(col) || CHART_COLORS[ci % CHART_COLORS.length]} radius={[4, 4, 0, 0]} maxBarSize={44} />
             ))}
             {chartData.lineCols.map((col, ci) => {
-              const lc = brandColor(col) || CHART_COLORS[(chartData.barCols.length + ci) % CHART_COLORS.length];
+              const lc = lineColor(col) || ["#38bdf8","#a78bfa","#34d399","#fbbf24","#f472b6"][ci % 5];
               return (
                 <Line key={col} yAxisId="right" dataKey={col} stroke={lc} strokeWidth={2.5}
                   connectNulls dot={{ r: 4, fill: lc, strokeWidth: 0 }} />
