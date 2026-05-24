@@ -257,12 +257,6 @@ function lineColor(name) {
   for (const [b, c] of Object.entries(LINE_COLORS)) { if (lower.includes(b)) return c; }
   return null;
 }
-function brandColor(name) {
-  const lower = (name || "").toLowerCase();
-  for (const [b, c] of Object.entries(BRAND_COLOR_MAP)) { if (lower.includes(b)) return c; }
-  return null;
-}
-
 /* ── Parse AI content: |...| → table, rest → text ── */
 function parseContent(content) {
   const blocks = [];
